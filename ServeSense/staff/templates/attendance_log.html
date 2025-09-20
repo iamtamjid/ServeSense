@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Attendance Log{% endblock %}
+
+{% block content %}
+    <h1>Attendance Log</h1>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Staff Member</th>
+                    <th>Clock In Time</th>
+                    <th>Clock Out Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log.staff_member.get_full_name|default:log.staff_member.username }}</td>
+                    <td>{{ log.clock_in_time }}</td>
+                    <td>{{ log.clock_out_time|default:"Still on duty" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="no-reservations">
+                        No attendance records found.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Staff Overview{% endblock %}
+
+{% block content %}
+    <h1>Staff Overview</h1>
+
+    <div class="page-actions">
+        <a href="{% url 'add_staff' %}" class="action-button">Add New Staff Member</a>
+        <a href="{% url 'attendance_log' %}" class="action-button secondary">View Attendance Log</a>
+    </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Full Name</th>
+                    <th>Role</th>
+                    <th>On Duty?</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for staff in staff_members %}
+                <tr>
+                    <td>{{ staff.username }}</td>
+                    <td>{{ staff.get_full_name }}</td>
+                    <td>{{ staff.role }}</td>
+                    <td>
+                        {% if staff.is_on_duty %}
+                            <span style="color: green; font-weight: bold;">Yes</span>
+                        {% else %}
+                            <span style="color: red;">No</span>
+                        {% endif %}
+                    </td>
+                    <td class="actions">
+                        <a href="{% url 'edit_staff' staff.id %}"><button class="edit">Edit</button></a>
+                        
+                        {% if staff.is_on_duty %}
+                            <a href="{% url 'clock_out' staff.id %}"><button class="cancel">Clock Out</button></a>
+                        {% else %}
+                            <a href="{% url 'clock_in' staff.id %}"><button class="accept">Clock In</button></a>
+                        {% endif %}
+                        </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="no-reservations">
+                        No staff members found.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
