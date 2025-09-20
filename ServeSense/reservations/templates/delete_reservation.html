@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Cancellation{% endblock %}
+
+{% block content %}
+    <div class="delete-confirm">
+        <h1>Confirm Cancellation</h1>
+        <p>Are you sure you want to cancel the reservation for <strong>{{ reservation.customer.firstName }} {{ reservation.customer.lastName }}</strong> on <strong>{{ reservation.reservationDate|date:"F d, Y" }}</strong> at <strong>{{ reservation.reservationTime|time:"H:i" }}</strong>?</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-actions">
+                <button type="submit" class="danger">Yes, Cancel Reservation</button>
+                
+                <a href="{% url 'reservation_list' %}" class="cancel">No, Go Back</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

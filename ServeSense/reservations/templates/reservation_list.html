@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Reservations Overview{% endblock %}
+
+{% block content %}
+    <h1>Reservations Overview</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Phone Number</th>
+                    <th>Date & Time</th>
+                    <th>Guests</th>
+                    <th>Table</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.customer.firstName }} {{ reservation.customer.lastName }}</td>
+                    <td>{{ reservation.customer.phoneNumber }}</td>
+                    <td>{{ reservation.reservationDate|date:"D, M d, Y" }} at {{ reservation.reservationTime|time:"H:i" }}</td>
+                    <td>{{ reservation.numberOfGuests }}</td>
+                    <td>{{ reservation.table.tableNumber }}</td>
+                    <td>{{ reservation.status }}</td>
+                    <td class="actions">
+                        <a href="{% url 'accept_reservation' reservation.id %}"><button class="accept">Accept</button></a>
+
+                        <a href="{% url 'edit_reservation' reservation.id %}" class="actions"><button class="edit">Edit</button></a>
+
+                        <a href="{% url 'delete_reservation' reservation.id %}"><button class="cancel">Cancel</button></a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="no-reservations">
+                        There are no upcoming reservations.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

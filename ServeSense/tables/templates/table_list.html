@@ -1,0 +1,25 @@
+<h1>Live Table Status</h1>
+<table border="1" cellpadding="5">
+    <tr><th>Table #</th><th>Capacity</th><th>Status</th><th>Time Left</th><th>Actions</th></tr>
+    {% for table in tables %}
+    <tr>
+        <td>{{ table.number }}</td>
+        <td>{{ table.capacity }}</td>
+        <td>{{ table.status }}</td>
+        <td>{{ table.time_left|default:"-" }}</td>
+        <td>
+            <a href="{% url 'table_edit' table.id %}">Edit</a> |
+            <a href="{% url 'table_delete' table.id %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Add New Table</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Table</button>
+</form>
+
+<a href="/">⬅ Back to Dashboard</a>

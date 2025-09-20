@@ -1,0 +1,25 @@
+<h1>Menu Management</h1>
+<table border="1" cellpadding="5">
+    <tr><th>Name</th><th>Price</th><th>Available</th><th>Best Seller</th><th>Actions</th></tr>
+    {% for item in menu_items %}
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.available }}</td>
+        <td>{% if item.best_seller %}⭐{% endif %}</td>
+        <td>
+            <a href="{% url 'menu_edit' item.id %}">Edit</a> |
+            <a href="{% url 'menu_delete' item.id %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Add New Menu Item</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Item</button>
+</form>
+
+<a href="/">⬅ Back to Dashboard</a>
