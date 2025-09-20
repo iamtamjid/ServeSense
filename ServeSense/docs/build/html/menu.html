@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu App &mdash; ServeSense 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reservations App" href="tables.html" />
+    <link rel="prev" title="Staff App" href="staff.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ServeSense
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="reservations.html">Reservations App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="staff.html">Staff App</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Menu App</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#menu.views.menu_delete"><code class="docutils literal notranslate"><span class="pre">menu_delete()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#menu.views.menu_edit"><code class="docutils literal notranslate"><span class="pre">menu_edit()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#menu.views.menu_list"><code class="docutils literal notranslate"><span class="pre">menu_list()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#menu.models.MenuItem"><code class="docutils literal notranslate"><span class="pre">MenuItem</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#menu.models.MenuItem.name"><code class="docutils literal notranslate"><span class="pre">MenuItem.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#menu.models.MenuItem.price"><code class="docutils literal notranslate"><span class="pre">MenuItem.price</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#menu.models.MenuItem.available"><code class="docutils literal notranslate"><span class="pre">MenuItem.available</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#menu.models.MenuItem.best_seller"><code class="docutils literal notranslate"><span class="pre">MenuItem.best_seller</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#menu.models.MenuItem.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">MenuItem.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#menu.models.MenuItem.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">MenuItem.MultipleObjectsReturned</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#menu.tests.MenuItemModelTest"><code class="docutils literal notranslate"><span class="pre">MenuItemModelTest</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#menu.tests.MenuItemModelTest.setUp"><code class="docutils literal notranslate"><span class="pre">MenuItemModelTest.setUp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#menu.tests.MenuItemModelTest.test_menu_item_creation"><code class="docutils literal notranslate"><span class="pre">MenuItemModelTest.test_menu_item_creation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#menu.tests.MenuViewsTest"><code class="docutils literal notranslate"><span class="pre">MenuViewsTest</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#menu.tests.MenuViewsTest.setUp"><code class="docutils literal notranslate"><span class="pre">MenuViewsTest.setUp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#menu.tests.MenuViewsTest.test_menu_list_view"><code class="docutils literal notranslate"><span class="pre">MenuViewsTest.test_menu_list_view()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html">Reservations App</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ServeSense</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Menu App</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/menu.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="menu-app">
+<h1>Menu App<a class="headerlink" href="#menu-app" title="Link to this heading"></a></h1>
+<p>This app handles all Menu-related functionality.</p>
+<dl class="py function" id="module-menu.views">
+<dt class="sig sig-object py" id="menu.views.menu_delete">
+<span class="sig-prename descclassname"><span class="pre">menu.views.</span></span><span class="sig-name descname"><span class="pre">menu_delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu/views.html#menu_delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#menu.views.menu_delete" title="Link to this definition"></a></dt>
+<dd><p>Delete a menu item.</p>
+<p>Retrieves a MenuItem by primary key and deletes it from the database.
+Redirects to the menu list after deletion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p></li>
+<li><p><strong>pk</strong> (<em>int</em>) – Primary key of the MenuItem to delete.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Redirects to the ‘menu_list’ view.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="menu.views.menu_edit">
+<span class="sig-prename descclassname"><span class="pre">menu.views.</span></span><span class="sig-name descname"><span class="pre">menu_edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu/views.html#menu_edit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#menu.views.menu_edit" title="Link to this definition"></a></dt>
+<dd><p>Edit an existing menu item.</p>
+<p>Retrieves a MenuItem by primary key. If the request method is POST,
+updates the item with form data. Otherwise, displays the form pre-filled
+with the item’s current data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p></li>
+<li><p><strong>pk</strong> (<em>int</em>) – Primary key of the MenuItem to edit.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Renders ‘menu/menu_edit.html’ with the edit form.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="menu.views.menu_list">
+<span class="sig-prename descclassname"><span class="pre">menu.views.</span></span><span class="sig-name descname"><span class="pre">menu_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu/views.html#menu_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#menu.views.menu_list" title="Link to this definition"></a></dt>
+<dd><p>Display all menu items and handle adding a new menu item.</p>
+<p>This view fetches all existing MenuItem records and displays them in a list.
+It also processes the form submission for adding a new menu item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – The HTTP request object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Renders ‘menu/menu_list.html’ with menu items and add form.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class" id="module-menu.models">
+<dt class="sig sig-object py" id="menu.models.MenuItem">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">menu.models.</span></span><span class="sig-name descname"><span class="pre">MenuItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu/models.html#MenuItem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#menu.models.MenuItem" title="Link to this definition"></a></dt>
+<dd><p>Represents a single menu item in the restaurant.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="menu.models.MenuItem.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#menu.models.MenuItem.name" title="Link to this definition"></a></dt>
+<dd><p>The name of the menu item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="menu.models.MenuItem.price">
+<span class="sig-name descname"><span class="pre">price</span></span><a class="headerlink" href="#menu.models.MenuItem.price" title="Link to this definition"></a></dt>
+<dd><p>The price of the item, up to 9999.99.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Decimal</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="menu.models.MenuItem.available">
+<span class="sig-name descname"><span class="pre">available</span></span><a class="headerlink" href="#menu.models.MenuItem.available" title="Link to this definition"></a></dt>
+<dd><p>True if the item is currently available for order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="menu.models.MenuItem.best_seller">
+<span class="sig-name descname"><span class="pre">best_seller</span></span><a class="headerlink" href="#menu.models.MenuItem.best_seller" title="Link to this definition"></a></dt>
+<dd><p>True if the item is a popular or recommended choice.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="menu.models.MenuItem.DoesNotExist">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#menu.models.MenuItem.DoesNotExist" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="menu.models.MenuItem.MultipleObjectsReturned">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#menu.models.MenuItem.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-menu.tests">
+<dt class="sig sig-object py" id="menu.tests.MenuItemModelTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">menu.tests.</span></span><span class="sig-name descname"><span class="pre">MenuItemModelTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu/tests.html#MenuItemModelTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#menu.tests.MenuItemModelTest" title="Link to this definition"></a></dt>
+<dd><p>Test suite for the MenuItem model.</p>
+<p>Ensures that MenuItem instances can be created and that their fields
+contain the expected values.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="menu.tests.MenuItemModelTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu/tests.html#MenuItemModelTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#menu.tests.MenuItemModelTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up test data for MenuItem model tests.</p>
+<p>Creates a sample MenuItem instance named “Pizza”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="menu.tests.MenuItemModelTest.test_menu_item_creation">
+<span class="sig-name descname"><span class="pre">test_menu_item_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu/tests.html#MenuItemModelTest.test_menu_item_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#menu.tests.MenuItemModelTest.test_menu_item_creation" title="Link to this definition"></a></dt>
+<dd><p>Test that a MenuItem is correctly created and its fields are accurate.</p>
+<p>Checks the price and availability of the created MenuItem.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="menu.tests.MenuViewsTest">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">menu.tests.</span></span><span class="sig-name descname"><span class="pre">MenuViewsTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu/tests.html#MenuViewsTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#menu.tests.MenuViewsTest" title="Link to this definition"></a></dt>
+<dd><p>Test suite for Menu-related views.</p>
+<p>Ensures that the menu list view loads correctly and displays menu items.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="menu.tests.MenuViewsTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu/tests.html#MenuViewsTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#menu.tests.MenuViewsTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up test data for Menu views tests.</p>
+<p>Creates a sample MenuItem instance named “Burger”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="menu.tests.MenuViewsTest.test_menu_list_view">
+<span class="sig-name descname"><span class="pre">test_menu_list_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/menu/tests.html#MenuViewsTest.test_menu_list_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#menu.tests.MenuViewsTest.test_menu_list_view" title="Link to this definition"></a></dt>
+<dd><p>Test that the menu list view returns HTTP 200 and contains expected content.</p>
+<p>Sends a GET request to the ‘menu’ view and checks for status code and item name.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="staff.html" class="btn btn-neutral float-left" title="Staff App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tables.html" class="btn btn-neutral float-right" title="Reservations App" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Mohaimen Azad, Tamjid Islam.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
