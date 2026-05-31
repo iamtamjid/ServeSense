@@ -1,8 +1,8 @@
-# 🍽️ ServeSense
-
 <p align="center">
   <img src="docs/images/banner.png" alt="ServeSense Banner" width="100%">
 </p>
+
+<h1 align="center">🍽️ ServeSense</h1>
 
 <p align="center">
   <b>Smart Restaurant Operations Platform</b><br>
